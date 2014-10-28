@@ -8,6 +8,8 @@ $(document).ready(function () {
         checkTriangleData.b = $("#checkTriangleB").val();
         checkTriangleData.c = $("#checkTriangleC").val();
 
+        $("#triangleResult").text("");
+
         $.ajax({
             type: "POST",
             url: host + "/triangle/checkTriangle",
@@ -15,12 +17,23 @@ $(document).ready(function () {
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success : function(response) {
-                alert("Success!");
-                alert(response.data);
+                var errorCode = response.errorCode;
+                if(errorCode == 0)  {
+                    var exists = response.data.exists;
+
+                    if(exists == "YES") {
+                        $("#triangleResult").text("Triangle exists!");
+                    }
+                    else if(exists == "NO") {
+                        $("#triangleResult").text("Triangle doesn't exist!");
+                    }
+                }
+                else {
+                    $("#triangleResult").text(response.message);
+                }
             },
             error: function (response) {
-                alert("Error!");
-                alert(response.data);
+                $("#triangleResult").text("Error occurred");
             }
         });
     })
