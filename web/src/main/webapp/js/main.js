@@ -13,11 +13,14 @@ $(document).ready(function () {
             url: host + "/triangle/checkTriangle",
             data: JSON.stringify(checkTriangleData),
             contentType: "application/json; charset=utf-8",
+            dataType: "json",
             success : function(response) {
-                alert("Success!")
+                alert("Success!");
+                alert(response.data);
             },
             error: function (response) {
                 alert("Error!");
+                alert(response.data);
             }
         });
     })

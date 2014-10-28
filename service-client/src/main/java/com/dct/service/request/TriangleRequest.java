@@ -1,5 +1,8 @@
 package com.dct.service.request;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class TriangleRequest {
     private Double a;
     private Double b;
