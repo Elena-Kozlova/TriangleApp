@@ -23,7 +23,7 @@ public class RestHttpClient<P> {
         return builder.post(ClientResponse.class, entityToPost);
     }
 
-    public ClientResponse get(MediaType mediaType, String targetURI) throws Exception {
+    public ClientResponse get(MediaType mediaType, String targetURI) {
         WebResource.Builder builder = getBuilder(mediaType, targetURI);
         return builder.get(ClientResponse.class);
     }

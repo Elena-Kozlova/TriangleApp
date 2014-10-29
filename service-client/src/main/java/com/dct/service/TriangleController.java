@@ -5,6 +5,7 @@ import com.dct.core.data.Message;
 import com.dct.service.request.TriangleRequest;
 import com.dct.service.response.ErrorResponse;
 import com.dct.service.response.TriangleResponse;
+import com.dct.service.response.VersionResponse;
 import com.dct.util.http.RestHttpClient;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
@@ -52,6 +53,35 @@ public class TriangleController {
         else {
             TriangleResponse triangleResponse = response.getEntity(TriangleResponse.class);
             message.setData(triangleResponse);
+        }
+
+        return message;
+    }
+
+    @RequestMapping(value = "/version", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    Message<VersionResponse> getServiceVersion() {
+        LOGGER.info("Getting service version");
+
+        Client client = Client.create();
+
+        RestHttpClient httpClient = new RestHttpClient(client);
+        ClientResponse response = httpClient.get(MediaType.APPLICATION_JSON_TYPE, triangleApiUrl + TriangleHttpUrls.GET_TRIANGLE_SERVICE_VERSION);
+
+        Message<VersionResponse> message = new Message<VersionResponse>();
+
+        LOGGER.debug("Triangle version response: {}", response);
+
+        if (response.getStatus() != 200) {
+            ErrorResponse errorResponse = response.getEntity(ErrorResponse.class);
+
+            message.setError(response.getStatus());
+            message.setMessage(errorResponse.getDetails());
+        }
+        else {
+            VersionResponse triangleVersionResponse = response.getEntity(VersionResponse.class);
+            message.setData(triangleVersionResponse);
         }
 
         return message;
