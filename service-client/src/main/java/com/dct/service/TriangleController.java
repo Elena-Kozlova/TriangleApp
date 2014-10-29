@@ -41,7 +41,7 @@ public class TriangleController {
 
         Message<TriangleResponse> message = new Message<TriangleResponse>();
 
-        LOGGER.debug("Triangle response: {}", message);
+        LOGGER.debug("Triangle response: {}", response);
 
         if (response.getStatus() != 200) {
             ErrorResponse errorResponse = response.getEntity(ErrorResponse.class);

@@ -69,7 +69,6 @@ public class CheckTriangleTest {
     }
 
     protected void printTriangleResponse(Message<TriangleResponse> triangleResponse) {
-        LOGGER.debug("Message response: {}", reflectionToString(triangleResponse, ToStringStyle.SHORT_PREFIX_STYLE));
-        LOGGER.debug("Triangle response: {}", reflectionToString(triangleResponse.getData(), ToStringStyle.SHORT_PREFIX_STYLE));
+        LOGGER.debug("Triangle response: {}", reflectionToString(triangleResponse, ToStringStyle.SHORT_PREFIX_STYLE));
     }
 }

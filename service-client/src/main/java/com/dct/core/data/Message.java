@@ -1,5 +1,7 @@
 package com.dct.core.data;
 
+import com.google.common.base.Objects;
+
 public class Message<T> {
     public static final String SUCCESS = "success";
     public static final String ERROR = "error";
@@ -41,5 +43,16 @@ public class Message<T> {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    @Override
+    public String toString() {
+        return Objects.toStringHelper(this)
+                .add("response", response)
+                .add("errorCode", errorCode)
+                .add("message", message)
+                .add("data", data)
+
+                .toString();
     }
 }

@@ -1,5 +1,7 @@
 package com.dct.service.request;
 
+import com.google.common.base.Objects;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
@@ -30,6 +32,16 @@ public class TriangleRequest {
 
     public void setC(Double c) {
         this.c = c;
+    }
+
+    @Override
+    public String toString() {
+        return Objects.toStringHelper(this)
+                .add("a", a)
+                .add("b", b)
+                .add("c", c)
+
+                .toString();
     }
 }
 
