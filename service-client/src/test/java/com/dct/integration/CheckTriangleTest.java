@@ -4,6 +4,7 @@ import com.dct.TestUtils;
 import com.dct.core.data.Message;
 import com.dct.service.request.TriangleRequest;
 import com.dct.service.response.TriangleResponse;
+import com.dct.service.response.VersionResponse;
 import com.dct.util.http.RestHttpClient;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
@@ -65,10 +66,19 @@ public class CheckTriangleTest {
         Message<TriangleResponse> triangleResponse = clientResponse.getEntity(new GenericType<Message<TriangleResponse>>() {});
 
         printTriangleResponse(triangleResponse);
-        assertThat("Triangle request occurred with result: NO", triangleResponse.getErrorCode(), not(equalTo(0)));
+        assertThat("Triangle request occurred with result: Error", triangleResponse.getErrorCode(), not(equalTo(0)));
     }
 
-    protected void printTriangleResponse(Message<TriangleResponse> triangleResponse) {
-        LOGGER.debug("Triangle response: {}", reflectionToString(triangleResponse, ToStringStyle.SHORT_PREFIX_STYLE));
+    @Test
+    public void testGetApplicationVersion() throws IOException {
+        ClientResponse clientResponse = restHttpClient.get(MediaType.APPLICATION_JSON_TYPE, TestUtils.getVersionTestApiUrl());
+        Message<VersionResponse> versionResponse = clientResponse.getEntity(new GenericType<Message<VersionResponse>>() {});
+
+        printTriangleResponse(versionResponse);
+        assertThat("Get version request occurred with result: 1.0-SNAPSHOT", versionResponse.getData().getVersion(), is(equalTo("1.0-SNAPSHOT")));
+    }
+
+    protected void printTriangleResponse(Message response) {
+        LOGGER.debug("Message response: {}", reflectionToString(response, ToStringStyle.SHORT_PREFIX_STYLE));
     }
 }

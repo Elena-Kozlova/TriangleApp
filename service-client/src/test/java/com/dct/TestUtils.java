@@ -20,6 +20,12 @@ public class TestUtils {
         return testProperties.getProperty("checkTriangleTestApiURL");
     }
 
+    public static String getVersionTestApiUrl() throws IOException {
+        Properties testProperties = getTestProperties();
+
+        return testProperties.getProperty("getVersionTestApiURL");
+    }
+
     private static Properties getTestProperties() throws IOException {
         Properties props = new Properties();
         File propertyFile = getResourceFile("test.properties");
