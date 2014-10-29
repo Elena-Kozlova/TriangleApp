@@ -8,6 +8,8 @@ import com.dct.service.response.TriangleResponse;
 import com.dct.util.http.RestHttpClient;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,19 +23,25 @@ import javax.ws.rs.core.MediaType;
 @RequestMapping("/triangle")
 public class TriangleController {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(TriangleController.class);
+
     @Value("${triangle.api.url}")
     private String triangleApiUrl;
 
     @RequestMapping(value = "/checkTriangle", method = RequestMethod.POST)
     public
     @ResponseBody
-    Message<TriangleResponse> checkTriangle(@RequestBody TriangleRequest triangle) throws Exception {
+    Message<TriangleResponse> checkTriangle(@RequestBody TriangleRequest triangle) {
+        LOGGER.info("Posting triangle request: {}", triangle);
+
         Client client = Client.create();
 
         RestHttpClient<TriangleRequest> httpClient = new RestHttpClient<TriangleRequest>(client);
         ClientResponse response = httpClient.post(MediaType.APPLICATION_JSON_TYPE, triangle, triangleApiUrl + TriangleHttpUrls.CHECK_TRIANGLE_SERVICE);
 
         Message<TriangleResponse> message = new Message<TriangleResponse>();
+
+        LOGGER.debug("Triangle response: {}", message);
 
         if (response.getStatus() != 200) {
             ErrorResponse errorResponse = response.getEntity(ErrorResponse.class);

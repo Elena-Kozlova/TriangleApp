@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Class-Path: spring-expression-3.2.2.RELEASE.jar jackson-mapper-asl-1.9
+ .13.jar stax-api-1.0-2.jar servlet-api-2.5.jar jersey-client-1.17.1.j
+ ar spring-context-3.2.2.RELEASE.jar spring-beans-3.2.2.RELEASE.jar ja
+ ckson-databind-2.2.2.jar jaxb-impl-2.2.3-1.jar jackson-xc-1.9.2.jar s
+ pring-aop-3.2.2.RELEASE.jar jaxb-api-2.2.2.jar jackson-annotations-2.
+ 2.2.jar jettison-1.1.jar aopalliance-1.0.jar slf4j-api-1.7.7.jar jack
+ son-jaxrs-1.9.2.jar commons-logging-1.1.1.jar spring-webmvc-3.2.2.REL
+ EASE.jar jackson-core-2.2.2.jar spring-web-3.2.2.RELEASE.jar jackson-
+ core-asl-1.9.13.jar activation-1.1.jar jersey-json-1.17.1.jar spring-
+ core-3.2.2.RELEASE.jar jersey-core-1.17.1.jar
+Main-Class: com.dct.run.Main
+
