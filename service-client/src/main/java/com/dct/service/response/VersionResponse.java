@@ -1,11 +1,10 @@
 package com.dct.service.response;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.google.common.base.Objects;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
-@XmlRootElement
-public class VersionResponse {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class VersionResponse extends BaseErrorResponse {
 
     private String version;
 

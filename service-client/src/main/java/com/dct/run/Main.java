@@ -14,7 +14,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        TriangleClient triangleClient = new TriangleClient();
+        MainHelper mainHelper = new MainHelper();
         TriangleRequest triangleRequest;
 
         try {
@@ -30,12 +30,12 @@ public class Main {
                 System.out.println("Enter side C:");
                 String c = br.readLine();
 
-                triangleRequest = triangleClient.composeTriangleRequest(a, b, c);
+                triangleRequest = mainHelper.composeTriangleRequest(a, b, c);
             } else {
-                triangleRequest = triangleClient.composeTriangleRequest(args[0], args[1], args[2]);
+                triangleRequest = mainHelper.composeTriangleRequest(args[0], args[1], args[2]);
             }
 
-            triangleClient.checkTriangle(triangleRequest);
+            mainHelper.checkTriangle(triangleRequest);
 
         } catch (IOException e) {
             e.printStackTrace();

@@ -1,6 +1,8 @@
 package com.dct.run;
 
+import com.dct.client.TriangleClient;
 import com.dct.core.data.Message;
+import com.dct.http.HttpStatusException;
 import com.dct.service.TriangleController;
 import com.dct.service.request.TriangleRequest;
 import com.dct.service.response.TriangleResponse;
@@ -9,16 +11,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class TriangleClient {
+public class MainHelper {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(TriangleClient.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MainHelper.class);
 
-    private TriangleController triangleController;
+    private TriangleClient triangleClient;
 
-    public TriangleClient() {
+    public MainHelper() {
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("./web-context.xml");
-        triangleController = applicationContext.getBean(TriangleController.class);
-
+        triangleClient = applicationContext.getBean(TriangleClient.class);
         LOGGER.info("Spring context initialized: {}", applicationContext);
     }
 
@@ -35,18 +36,17 @@ public class TriangleClient {
     }
 
     public void checkTriangle(TriangleRequest triangleRequest) {
-        Message<TriangleResponse> responseMessage = triangleController.checkTriangle(triangleRequest);
+        try {
+            TriangleResponse triangleResponse = triangleClient.checkTriangle(triangleRequest);
 
-        if(responseMessage.getErrorCode() == 0) {
-            if(responseMessage.getData().getExists().equalsIgnoreCase("YES")) {
+            if (triangleResponse.getExists().equalsIgnoreCase("YES")) {
                 System.out.println("Triangle exists!");
-            }
-            else if(responseMessage.getData().getExists().equalsIgnoreCase("NO")) {
+            } else if (triangleResponse.getExists().equalsIgnoreCase("NO")) {
                 System.out.println("Triangle doesn't exist!");
             }
         }
-        else {
-            System.out.printf(responseMessage.getMessage());
+        catch (HttpStatusException e) {
+            System.out.println(e.getMessage());
         }
     }
 }
