@@ -1,4 +1,4 @@
-package com.dct.http;
+package com.dct.exception;
 
 import com.sun.jersey.api.client.ClientResponse;
 

@@ -1,5 +1,6 @@
-package com.dct.http;
+package com.dct.client;
 
+import com.dct.exception.HttpStatusException;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.GenericType;

@@ -1,8 +1,7 @@
 package com.dct.client;
 
 import com.dct.config.TriangleHttpUrls;
-import com.dct.http.HttpStatusException;
-import com.dct.http.RestHttpClient;
+import com.dct.exception.HttpStatusException;
 import com.dct.service.request.TriangleRequest;
 import com.dct.service.response.TriangleResponse;
 import com.dct.service.response.VersionResponse;
