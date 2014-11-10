@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.google.common.base.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public abstract class BaseErrorResponse {
+public class BaseErrorResponse {
 
     private String message;
     private String details;

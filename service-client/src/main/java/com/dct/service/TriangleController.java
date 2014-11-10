@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/triangle")
-public class TriangleController {
+public class TriangleController extends BaseController {
 
     @Autowired
     private TriangleClient triangleClient;
@@ -27,36 +27,28 @@ public class TriangleController {
     @RequestMapping(value = "/checkTriangle", method = RequestMethod.POST)
     public
     @ResponseBody
-    Message<TriangleResponse> checkTriangle(@RequestBody TriangleRequest triangle) {
-        Message<TriangleResponse> message = new Message<TriangleResponse>();
-
+    Message checkTriangle(@RequestBody TriangleRequest triangle) {
         try {
+            Message<TriangleResponse> message = new Message<TriangleResponse>();
             TriangleResponse triangleResponse = triangleClient.checkTriangle(triangle);
             message.setData(triangleResponse);
+            return message;
         } catch (HttpStatusException e) {
-            TriangleResponse triangleErrorResponse = e.getEntity(TriangleResponse.class);
-            message.setMessage(triangleErrorResponse.getDetails());
-            message.setError(e.getStatus());
+            return getErrorResponse(e);
         }
-
-        return message;
     }
 
     @RequestMapping(value = "/version", method = RequestMethod.GET)
     public
     @ResponseBody
-    Message<VersionResponse> getServiceVersion() {
-        Message<VersionResponse> message = new Message<VersionResponse>();
-
+    Message getServiceVersion() {
         try {
+            Message<VersionResponse> message = new Message<VersionResponse>();
             VersionResponse versionResponse = triangleClient.getServiceVersion();
             message.setData(versionResponse);
+            return message;
         } catch (HttpStatusException e) {
-            VersionResponse versionErrorResponse = e.getEntity(VersionResponse.class);
-            message.setMessage(versionErrorResponse.getDetails());
-            message.setError(e.getStatus());
+            return getErrorResponse(e);
         }
-
-        return message;
     }
 }
