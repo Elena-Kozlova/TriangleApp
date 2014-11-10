@@ -17,7 +17,12 @@
         <javax.servlet>2.5</javax.servlet>
         <dropwizard.version>0.6.2</dropwizard.version>
         <commons-lang.version>3.2.1</commons-lang.version>
+        <mockito.version>1.9.5</mockito.version>
         <junit.version>4.11</junit.version>
+
+        <javadoc.version>2.9.1</javadoc.version>
+        <surefire.version>2.17</surefire.version>
+        <failsafe.version>2.17</failsafe.version>
     </properties>
 
     <dependencies>
@@ -54,6 +59,19 @@
         </dependency>
 
         <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>${mockito.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>hamcrest-core</artifactId>
+                    <groupId>org.hamcrest</groupId>
+                </exclusion>
+            </exclusions>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>${junit.version}</version>
@@ -73,12 +91,38 @@
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${javadoc.version}</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${surefire.version}</version>
+                <configuration>
+                    <excludedGroups>
+                        com.dct.IntegrationTests
+                    </excludedGroups>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.17</version>
+                <version>${failsafe.version}</version>
                 <configuration>
                     <includes>
-                        <include>com.dct.integration.CheckTriangleTest.java</include>
+                        <include>**/*.java</include>
                     </includes>
+                    <groups>com.dct.IntegrationTests</groups>
                 </configuration>
             </plugin>
 

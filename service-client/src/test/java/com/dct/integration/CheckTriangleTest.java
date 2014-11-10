@@ -1,8 +1,10 @@
 package com.dct.integration;
 
+import com.dct.IntegrationTests;
 import com.dct.TestUtils;
 import com.dct.core.data.Message;
 import com.dct.service.request.TriangleRequest;
+import com.dct.service.response.TriangleExistsEnum;
 import com.dct.service.response.TriangleResponse;
 import com.dct.service.response.VersionResponse;
 import com.dct.exception.HttpStatusException;
@@ -12,6 +14,7 @@ import com.sun.jersey.api.client.GenericType;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,6 +27,7 @@ import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsNot.not;
 import static org.junit.Assert.assertThat;
 
+@Category(IntegrationTests.class)
 public class CheckTriangleTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CheckTriangleTest.class);
@@ -44,7 +48,7 @@ public class CheckTriangleTest {
                 triangleRequest, TestUtils.getCheckTriangleTestApiUrl(), new GenericType<Message<TriangleResponse>>(){});
         printTriangleResponse(triangleResponse);
 
-        assertThat("Triangle request occurred with result: YES", triangleResponse.getData().getExists(), is(equalTo("YES")));
+        assertThat("Triangle request occurred with result: YES", triangleResponse.getData().getExists(), is(equalTo(TriangleExistsEnum.YES)));
     }
 
     @Test
@@ -55,7 +59,7 @@ public class CheckTriangleTest {
                 triangleRequest, TestUtils.getCheckTriangleTestApiUrl(), new GenericType<Message<TriangleResponse>>(){});
         printTriangleResponse(triangleMessageResponse);
 
-        assertThat("Triangle request occurred with result: NO", triangleMessageResponse.getData().getExists(), is(equalTo("NO")));
+        assertThat("Triangle request occurred with result: NO", triangleMessageResponse.getData().getExists(), is(equalTo(TriangleExistsEnum.NO)));
     }
 
     @Test

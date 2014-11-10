@@ -1,47 +1,41 @@
 package com.dct.run;
 
+import com.dct.client.TriangleClient;
+import com.dct.exception.HttpStatusException;
 import com.dct.service.request.TriangleRequest;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.dct.service.response.TriangleExistsEnum;
+import com.dct.service.response.TriangleResponse;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 public class Main {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
+    public static void main(String[] args) throws IOException {
 
-    public static void main(String[] args) {
-
-        MainHelper mainHelper = new MainHelper();
+        TriangleRequestBuilder requestBuilder = new TriangleRequestBuilder();
         TriangleRequest triangleRequest;
 
+        if (args.length != 3) {
+            triangleRequest = requestBuilder.buildTriangleRequest();
+        }
+        else {
+            triangleRequest = requestBuilder.buildTriangleRequest(args);
+        }
+
+        TriangleContextLoader contextLoader = new TriangleContextLoader();
+        TriangleClient triangleClient = contextLoader.getTriangleClient();
+
         try {
-            if (args.length < 3) {
-                BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+            TriangleResponse triangleResponse = triangleClient.checkTriangle(triangleRequest);
 
-                System.out.println("Enter side A:");
-                String a = br.readLine();
-
-                System.out.println("Enter side B:");
-                String b = br.readLine();
-
-                System.out.println("Enter side C:");
-                String c = br.readLine();
-
-                triangleRequest = mainHelper.composeTriangleRequest(a, b, c);
-            } else {
-                triangleRequest = mainHelper.composeTriangleRequest(args[0], args[1], args[2]);
+            if (triangleResponse.getExists() == TriangleExistsEnum.YES) {
+                System.out.println("Triangle exists!");
+            } else if (triangleResponse.getExists() == TriangleExistsEnum.NO) {
+                System.out.println("Triangle doesn't exist!");
             }
-
-            mainHelper.checkTriangle(triangleRequest);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (NumberFormatException e) {
-            System.out.println("The side(s) is in incorrect format");
-            LOGGER.error("Triangle side was specified in incorrect format, e");
+        }
+        catch (HttpStatusException e) {
+            System.out.println(e.getMessage());
         }
     }
 }

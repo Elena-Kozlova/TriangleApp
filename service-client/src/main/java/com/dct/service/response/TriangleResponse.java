@@ -6,13 +6,13 @@ import com.google.common.base.Objects;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TriangleResponse extends BaseErrorResponse {
 
-    private String exists;
+    private TriangleExistsEnum exists;
 
-    public String getExists() {
+    public TriangleExistsEnum getExists() {
         return exists;
     }
 
-    public void setExists(String exists) {
+    public void setExists(TriangleExistsEnum exists) {
         this.exists = exists;
     }
 
