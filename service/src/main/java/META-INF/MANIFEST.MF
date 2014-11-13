@@ -1,0 +1,22 @@
+Manifest-Version: 1.0
+Class-Path: jackson-dataformat-yaml-2.1.4.jar jetty-continuation-8.1.1
+ 0.v20130312.jar argparse4j-0.4.0.jar jersey-core-1.17.1.jar jersey-cl
+ ient-1.17.1.jar jsr305-2.0.1.jar jersey-apache-client4-1.17.1.jar jet
+ ty-servlet-8.1.10.v20130312.jar metrics-logback-2.2.0.jar slf4j-api-1
+ .7.4.jar jetty-security-8.1.10.v20130312.jar jetty-io-8.1.10.v2013031
+ 2.jar jackson-databind-2.1.4.jar jul-to-slf4j-1.7.4.jar jackson-datat
+ ype-joda-2.1.2.jar jetty-http-8.1.10.v20130312.jar jetty-util-8.1.10.
+ v20130312.jar commons-lang3-3.2.1.jar metrics-annotation-2.2.0.jar je
+ rsey-servlet-1.17.1.jar commons-codec-1.6.jar jackson-module-jaxb-ann
+ otations-2.1.4.jar jersey-server-1.17.1.jar asm-3.1.jar log4j-over-sl
+ f4j-1.7.4.jar commons-logging-1.1.1.jar metrics-httpclient-2.2.0.jar 
+ logback-core-1.0.10.jar metrics-servlet-2.2.0.jar metrics-jetty-2.2.0
+ .jar logback-classic-1.0.10.jar jackson-jaxrs-json-provider-2.1.4.jar
+  dropwizard-core-0.6.2.jar jackson-core-2.1.4.jar jackson-datatype-gu
+ ava-2.1.2.jar httpclient-4.2.3.jar hibernate-validator-4.3.1.Final.ja
+ r metrics-core-2.2.0.jar javax.servlet-3.0.0.v201112011016.jar joda-t
+ ime-2.2.jar guava-14.0.1.jar dropwizard-client-0.6.2.jar jboss-loggin
+ g-3.1.0.CR2.jar jetty-server-8.1.10.v20130312.jar validation-api-1.0.
+ 0.GA.jar metrics-jersey-2.2.0.jar httpcore-4.2.2.jar jackson-annotati
+ ons-2.1.4.jar
+
