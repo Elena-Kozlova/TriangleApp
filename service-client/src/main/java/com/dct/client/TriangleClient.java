@@ -13,6 +13,9 @@ import org.springframework.stereotype.Component;
 
 import javax.ws.rs.core.MediaType;
 
+/**
+ *  TriangleClient - sends REST calls to Triangle Service for triangle checking.
+ */
 @Component
 public class TriangleClient {
 
@@ -28,6 +31,13 @@ public class TriangleClient {
         httpClient = new RestHttpClient(client);
     }
 
+    /**
+     * Sends REST call for checking if triangle exists from math point of view.
+     *
+     * @param triangleRequest      Triangle parameters.
+     * @return                     TriangleResponse (true if triangle exists, false otherwise).
+     * @throws HttpStatusException Exception if status code is not 200.
+     */
     public TriangleResponse checkTriangle(TriangleRequest triangleRequest) throws HttpStatusException {
         LOGGER.info("Posting triangle request: {}", triangleRequest);
 
@@ -39,6 +49,12 @@ public class TriangleClient {
         return triangleResponse;
     }
 
+    /**
+     * Sends REST call for getting Triangle Service version.
+     *
+     * @return                     VersionResponse object with actual service version.
+     * @throws HttpStatusException Exception if status code is not 200.
+     */
     public VersionResponse getServiceVersion() throws HttpStatusException {
         LOGGER.info("Getting service version");
 

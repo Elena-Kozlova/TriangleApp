@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+/**
+ * Controller for working wit Triangle Service.
+ */
 @Controller
 @RequestMapping("/triangle")
 public class TriangleController extends BaseController {
@@ -24,6 +27,12 @@ public class TriangleController extends BaseController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TriangleController.class);
 
+    /**
+     * Calls TriangleClient to check if triangle exists.
+     *
+     * @param triangle Triangle parameters.
+     * @return         Message with check triangle result.
+     */
     @RequestMapping(value = "/checkTriangle", method = RequestMethod.POST)
     public
     @ResponseBody
@@ -38,6 +47,11 @@ public class TriangleController extends BaseController {
         }
     }
 
+    /**
+     * Calls TriangleClient to get service version.
+     *
+     * @return Message with version result.
+     */
     @RequestMapping(value = "/version", method = RequestMethod.GET)
     public
     @ResponseBody

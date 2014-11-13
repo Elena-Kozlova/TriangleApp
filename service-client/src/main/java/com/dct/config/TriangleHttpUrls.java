@@ -1,5 +1,8 @@
 package com.dct.config;
 
+/**
+ * URLS for REST calls to Triangle Service.
+ */
 public class TriangleHttpUrls {
 
     public static final String CHECK_TRIANGLE_SERVICE = "service/checkTriangle";

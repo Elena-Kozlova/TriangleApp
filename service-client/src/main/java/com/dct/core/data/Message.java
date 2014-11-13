@@ -2,6 +2,11 @@ package com.dct.core.data;
 
 import com.google.common.base.Objects;
 
+/**
+ * Response message.
+ *
+ * @param <T> Object type to be returned.
+ */
 public class Message<T> {
     public static final String SUCCESS = "success";
     public static final String ERROR = "error";
